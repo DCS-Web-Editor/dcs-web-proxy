@@ -33,8 +33,9 @@ for (const name of Object.keys(nets)) {
 }
 
 httpsServer.listen(PORT, () => {
-  console.log("DCS Web Proxy is listening for requests on port", PORT);
-  console.log("\nComputer IP adresses:", JSON.stringify(results, null, 2));
+  console.log("DCS Web Proxy is listening for https requests on port", PORT);
+  console.log("\nLocal network IP adresses:", JSON.stringify(results, null, 2));
+  console.log("------------------");
 });
 
 const config = {
@@ -42,7 +43,7 @@ const config = {
 };
 
 app.get("*", async (req, res) => {
-  console.log("REQUEST", req.path);
+  console.log("REQUEST", req.path, res.statusCode);
   try {
     const forward = await axios.get("http://localhost:31485" + req.path, config);
     const data = forward?.data;
