@@ -11,10 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@vitejs/plugin-basic-ssl": "^1.1.0",
     "axios": "^1.7.2",
-    "express": "^4.19.2",
-    "vite": "^5.3.4",
-    "vite-plugin-mkcert": "^1.17.5"
+    "express": "^4.19.2"
   }
 }
