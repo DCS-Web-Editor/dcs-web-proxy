@@ -49,7 +49,7 @@ app.get("*", async (req, res) => {
     res.send(data);
   } catch (error) {
     if(error.cause) console.error(error.cause);
-    console.log(req.method, "failed", forwarded, forward.status);
+    console.log(req.method, "failed", forwarded, error.code);
     res.status(500);
     res.send(error.cause);
   }
