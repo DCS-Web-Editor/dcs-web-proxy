@@ -1,0 +1,20 @@
+{
+  "name": "dcs-web-proxy",
+  "version": "1.0.0",
+  "description": "proxy for local dcs to network",
+  "main": "server/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@vitejs/plugin-basic-ssl": "^1.1.0",
+    "axios": "^1.7.2",
+    "express": "^4.19.2",
+    "vite": "^5.3.4",
+    "vite-plugin-mkcert": "^1.17.5"
+  }
+}
