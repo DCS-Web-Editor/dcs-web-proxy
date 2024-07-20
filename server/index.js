@@ -5,6 +5,7 @@ import http from "http";
 import https from "https";
 import cors from "cors";
 
+
 var privateKey = fs.readFileSync("./localhost-key.pem", "utf8");
 var certificate = fs.readFileSync("./localhost.pem", "utf8");
 var credentials = { key: privateKey, cert: certificate };

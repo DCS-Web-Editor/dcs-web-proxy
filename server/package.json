@@ -1,0 +1,29 @@
+{
+  "name": "dcs-web-proxy",
+  "version": "1.0.0",
+  "description": "proxy for local dcs to network",
+  "main": "index.html",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "window": {
+    "title": "DCS WEB PROXY",
+    "toolbar": true,
+    "width": 700,
+    "height": 200,
+    "min_width": 200,
+    "min_height": 100,
+    "max_width": 1000,
+    "max_height": 1000,
+    "position": "mouse"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.7.2",
+    "cors": "^2.8.5",
+    "express": "^4.19.2"
+  }
+}
