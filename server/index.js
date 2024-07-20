@@ -33,8 +33,8 @@ for (const name of Object.keys(nets)) {
 }
 
 httpsServer.listen(PORT, () => {
-  console.log("Our app is listening for request on port", PORT);
-  console.log("IP Adresses:", JSON.stringify(results, null, 2));
+  console.log("DCS Web Proxy is listening for requests on port", PORT);
+  console.log("\nComputer IP adresses:", JSON.stringify(results, null, 2));
 });
 
 const config = {
