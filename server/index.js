@@ -1,9 +1,11 @@
-import express from "express";
-import axios from "axios";
-import fs from "fs";
-import http from "http";
-import https from "https";
-import cors from "cors";
+// import express from "express";
+const express = require('express');
+const axios = require("axios");
+const fs = require("fs");
+const http = require("http");
+const https = require("https");
+const cors = require("cors");
+
 
 var privateKey = fs.readFileSync("./localhost-key.pem", "utf8");
 var certificate = fs.readFileSync("./localhost.pem", "utf8");
@@ -13,9 +15,8 @@ const app = express();
 app.use(cors());
 
 var httpsServer = https.createServer(credentials, app);
-const PORT = 443;
 
-import { networkInterfaces } from "os";
+const { networkInterfaces } = require("os");
 
 const nets = networkInterfaces();
 const results = Object.create(null); // Or just '{}', an empty object
@@ -34,25 +35,32 @@ for (const name of Object.keys(nets)) {
   }
 }
 
-httpsServer.listen(PORT, () => {
-  console.log("DCS Web Proxy is listening for https requests on port", PORT);
-  console.log("\nLocal network IP adresses:", JSON.stringify(results, null, 2));
-  console.log("------------------");
-});
 
 const config = {
   timeout: 2000,
 };
 
 app.get("*", async (req, res) => {
-  console.log("REQUEST", req.path, res.statusCode);
+  const forwarded = "http://127.0.0.1:31485" + req.path;
   try {
-    const forward = await axios.get("http://127.0.0.1:31485" + req.path, config);
+    const forward = await axios.get(forwarded, config);
+    console.log(req.method, req.protocol, req.headers.host + req.path, "forwarded to", forwarded, forward.status);
     const data = forward?.data;
     res.send(data);
   } catch (error) {
     if(error.cause) console.error(error.cause);
+    console.log(req.method, "failed", forwarded, forward.status);
     res.status(500);
     res.send(error.cause);
   }
 });
+
+
+module.exports = function startProxy(port = 443) {
+  httpsServer.listen(port, () => {
+    console.log("DCS Web Proxy is listening for https requests on port", port);
+    console.log("\nLocal network IP adresses:", JSON.stringify(results, null, 2));
+    console.log("------------------");
+  });
+    
+}

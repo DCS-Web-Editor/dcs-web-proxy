@@ -3,16 +3,21 @@
   "version": "1.0.0",
   "description": "proxy for local dcs to network",
   "main": "server/index.js",
-  "type": "module",
+  "bin": "server/bin.js",
+  "type": "commonjs",
   "scripts": {
     "start": "node server/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "bin": "node server/bin.js",
+    "build": "pkg . -t node18-win-x64"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "DCS Web Editor",
+  "license": "GNU AFFERO GENERAL PUBLIC LICENSE",
   "dependencies": {
     "axios": "^1.7.2",
     "cors": "^2.8.5",
     "express": "^4.19.2"
+  },
+  "pkg": {
+    "options": []
   }
 }
