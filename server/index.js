@@ -3,12 +3,14 @@ import axios from "axios";
 import fs from "fs";
 import http from "http";
 import https from "https";
+import cors from "cors";
 
 var privateKey = fs.readFileSync("./localhost-key.pem", "utf8");
 var certificate = fs.readFileSync("./localhost.pem", "utf8");
 var credentials = { key: privateKey, cert: certificate };
 
 const app = express();
+app.use(cors());
 
 var httpsServer = https.createServer(credentials, app);
 const PORT = 443;
@@ -45,11 +47,11 @@ const config = {
 app.get("*", async (req, res) => {
   console.log("REQUEST", req.path, res.statusCode);
   try {
-    const forward = await axios.get("http://localhost:31485" + req.path, config);
+    const forward = await axios.get("http://127.0.0.1:31485" + req.path, config);
     const data = forward?.data;
     res.send(data);
   } catch (error) {
-    console.error(error.cause);
+    if(error.cause) console.error(error.cause);
     res.status(500);
     res.send(error.cause);
   }
